@@ -4,9 +4,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ChatWidget } from "@/components/ChatWidget";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-
 // Marketplace Pages
 import Amazon from "./pages/marketplace/Amazon";
 import Walmart from "./pages/marketplace/Walmart";
@@ -32,6 +32,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <ChatWidget />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
