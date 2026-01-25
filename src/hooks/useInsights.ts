@@ -1,27 +1,38 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 
 export type Insight = Tables<"insights">;
 
+const PAGE_SIZE = 6;
+
 export const useInsights = (category: string) => {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ["insights", category],
-    queryFn: async () => {
-      const { data, error } = await supabase
+    queryFn: async ({ pageParam = 0 }) => {
+      const from = pageParam * PAGE_SIZE;
+      const to = from + PAGE_SIZE - 1;
+
+      const { data, error, count } = await supabase
         .from("insights")
-        .select("*")
+        .select("*", { count: "exact" })
         .eq("category", category as Insight["category"])
         .order("published_date", { ascending: false })
-        .limit(6);
+        .range(from, to);
 
       if (error) {
         console.error("Error fetching insights:", error);
         throw error;
       }
 
-      return data;
+      return {
+        data: data || [],
+        nextPage: data && data.length === PAGE_SIZE ? pageParam + 1 : undefined,
+        totalCount: count || 0,
+      };
     },
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+    initialPageParam: 0,
   });
 };
 
