@@ -1,4 +1,4 @@
-import { Header } from "@/components/landing/Header";
+import { PageLayout } from "@/components/layout/PageLayout";
 import { Hero } from "@/components/landing/Hero";
 import { MarketplaceLogos } from "@/components/landing/MarketplaceLogos";
 import { Services } from "@/components/landing/Services";
@@ -13,16 +13,10 @@ import { Testimonials } from "@/components/landing/Testimonials";
 import { Process } from "@/components/landing/Process";
 import { FAQ } from "@/components/landing/FAQ";
 import { CTA } from "@/components/landing/CTA";
-import { Footer } from "@/components/landing/Footer";
-import { ContactModal } from "@/components/landing/ContactModal";
-import { ContactModalProvider, useContactModal } from "@/contexts/ContactModalContext";
 
-const IndexContent = () => {
-  const { isOpen, closeModal } = useContactModal();
-
+const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Header />
+    <PageLayout withHeaderPadding={false}>
       <Hero />
       <MarketplaceLogos />
       <Services />
@@ -37,17 +31,7 @@ const IndexContent = () => {
       <Process />
       <FAQ />
       <CTA />
-      <Footer />
-      <ContactModal isOpen={isOpen} onClose={closeModal} />
-    </div>
-  );
-};
-
-const Index = () => {
-  return (
-    <ContactModalProvider>
-      <IndexContent />
-    </ContactModalProvider>
+    </PageLayout>
   );
 };
 
