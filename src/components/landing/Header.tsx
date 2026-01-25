@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, Building2, Truck, Megaphone, ShoppingCart, Store, Home, Wrench } from "lucide-react";
 import { useContactModal } from "@/contexts/ContactModalContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link } from "react-router-dom";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 const sectionLinks = [
   { label: "Results", href: "#results" },
@@ -20,16 +23,51 @@ const sectionLinks = [
 ];
 
 const marketplaceLinks = [
-  { label: "Amazon", href: "/marketplace/amazon" },
-  { label: "Walmart", href: "/marketplace/walmart" },
-  { label: "Home Depot", href: "/marketplace/home-depot" },
-  { label: "Lowe's", href: "/marketplace/lowes" },
+  { 
+    label: "Amazon", 
+    href: "/marketplace/amazon",
+    icon: ShoppingCart,
+    description: "Dominate the world's largest online marketplace"
+  },
+  { 
+    label: "Walmart", 
+    href: "/marketplace/walmart",
+    icon: Store,
+    description: "Expand into Walmart's growing e-commerce platform"
+  },
+  { 
+    label: "Home Depot", 
+    href: "/marketplace/home-depot",
+    icon: Home,
+    description: "Reach DIY enthusiasts and contractors"
+  },
+  { 
+    label: "Lowe's", 
+    href: "/marketplace/lowes",
+    icon: Wrench,
+    description: "Connect with home improvement shoppers"
+  },
 ];
 
 const serviceLinks = [
-  { label: "Company Formation", href: "/services/company-formation" },
-  { label: "Fulfillment", href: "/services/fulfillment" },
-  { label: "Marketing", href: "/services/marketing" },
+  { 
+    label: "Company Formation", 
+    href: "/services/company-formation",
+    icon: Building2,
+    description: "Establish your US business entity with full compliance"
+  },
+  { 
+    label: "Fulfillment", 
+    href: "/services/fulfillment",
+    icon: Truck,
+    description: "Streamlined logistics and inventory management"
+  },
+  { 
+    label: "Marketing", 
+    href: "/services/marketing",
+    icon: Megaphone,
+    description: "Strategic campaigns to boost your marketplace visibility"
+  },
 ];
 
 export const Header = () => {
@@ -92,39 +130,79 @@ export const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            {/* Services Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors outline-none">
-                Services
-                <ChevronDown className="h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-48">
-                {serviceLinks.map((link) => (
-                  <DropdownMenuItem key={link.href} asChild>
-                    <Link to={link.href} className="w-full cursor-pointer">
-                      {link.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <NavigationMenu>
+              <NavigationMenuList>
+                {/* Services Mega Menu */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground data-[state=open]:text-foreground">
+                    Services
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      {serviceLinks.map((link) => (
+                        <li key={link.href}>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to={link.href}
+                              className={cn(
+                                "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              )}
+                            >
+                              <div className="flex items-center gap-3">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                                  <link.icon className="h-5 w-5 text-primary" />
+                                </div>
+                                <div>
+                                  <div className="text-sm font-medium leading-none">{link.label}</div>
+                                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
+                                    {link.description}
+                                  </p>
+                                </div>
+                              </div>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
 
-            {/* Marketplaces Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors outline-none">
-                Marketplaces
-                <ChevronDown className="h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-48">
-                {marketplaceLinks.map((link) => (
-                  <DropdownMenuItem key={link.href} asChild>
-                    <Link to={link.href} className="w-full cursor-pointer">
-                      {link.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                {/* Marketplaces Mega Menu */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground data-[state=open]:text-foreground">
+                    Marketplaces
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      {marketplaceLinks.map((link) => (
+                        <li key={link.href}>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to={link.href}
+                              className={cn(
+                                "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              )}
+                            >
+                              <div className="flex items-center gap-3">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                                  <link.icon className="h-5 w-5 text-primary" />
+                                </div>
+                                <div>
+                                  <div className="text-sm font-medium leading-none">{link.label}</div>
+                                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
+                                    {link.description}
+                                  </p>
+                                </div>
+                              </div>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
 
             {/* Section Links */}
             {sectionLinks.map((link) => (
@@ -199,9 +277,15 @@ export const Header = () => {
                       key={link.href}
                       to={link.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className="py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="py-3 flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {link.label}
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+                        <link.icon className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium">{link.label}</div>
+                        <p className="text-xs text-muted-foreground line-clamp-1">{link.description}</p>
+                      </div>
                     </Link>
                   ))}
                 </div>
@@ -224,9 +308,15 @@ export const Header = () => {
                       key={link.href}
                       to={link.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className="py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="py-3 flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {link.label}
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+                        <link.icon className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium">{link.label}</div>
+                        <p className="text-xs text-muted-foreground line-clamp-1">{link.description}</p>
+                      </div>
                     </Link>
                   ))}
                 </div>
