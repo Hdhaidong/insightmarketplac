@@ -22,119 +22,119 @@ const insightsData: Record<string, Array<{
   stats: { views: string; likes: string };
   tag: string;
 }>> = {
-  "hot-products": [
+  "influencer-analysis": [
     {
-      title: "智能家居控制器成为亚马逊Best Seller",
-      description: "该产品在过去30天内销量增长340%，成为家居类目TOP 1爆品。",
+      title: "头部科技类网红带货能力分析报告",
+      description: "深度解析TOP 50科技类网红的粉丝画像、带货转化率及合作模式。",
       date: "2025-01-24",
-      stats: { views: "125K", likes: "8.2K" },
-      tag: "家居",
-    },
-    {
-      title: "便携式投影仪在Walmart销量暴涨",
-      description: "凭借独特的便携设计和4K画质，该产品在电子类目中脱颖而出。",
-      date: "2025-01-23",
-      stats: { views: "98K", likes: "6.5K" },
-      tag: "电子",
-    },
-    {
-      title: "户外露营装备套装持续热销",
-      description: "组合套装策略帮助卖家实现客单价提升200%。",
-      date: "2025-01-22",
-      stats: { views: "76K", likes: "4.3K" },
-      tag: "户外",
-    },
-  ],
-  "influencers": [
-    {
-      title: "@TechReviewer 单条视频带货$50万",
-      description: "科技类头部网红最新带货视频创下单品销售记录。",
-      date: "2025-01-24",
-      stats: { views: "2.3M", likes: "180K" },
+      stats: { views: "156K", likes: "12.3K" },
       tag: "科技",
     },
     {
-      title: "@HomeDecorQueen 家居改造系列走红",
-      description: "连续5条视频播放量破百万，合作品牌销量翻倍。",
+      title: "家居类网红合作ROI对比",
+      description: "对比分析不同粉丝量级家居网红的投放效果与性价比。",
       date: "2025-01-23",
-      stats: { views: "1.8M", likes: "145K" },
+      stats: { views: "89K", likes: "6.8K" },
       tag: "家居",
     },
     {
-      title: "@FitnessGuru 健身器材评测引爆销量",
-      description: "真实使用场景展示让产品转化率提升65%。",
+      title: "美妆网红跨平台影响力评估",
+      description: "从TikTok到Instagram，美妆网红如何实现多平台流量变现。",
       date: "2025-01-22",
-      stats: { views: "890K", likes: "72K" },
-      tag: "健身",
+      stats: { views: "134K", likes: "9.5K" },
+      tag: "美妆",
     },
   ],
-  "platform-growth": [
+  "hot-product-analysis": [
     {
-      title: "Home Depot Q4销售额同比增长45%",
-      description: "第三方卖家计划持续扩张，新入驻品牌数量创历史新高。",
+      title: "2025年Q1家居类爆品趋势预测",
+      description: "基于大数据分析，预测下季度家居类目最具潜力的产品方向。",
       date: "2025-01-24",
-      stats: { views: "45K", likes: "3.2K" },
+      stats: { views: "203K", likes: "15.6K" },
       tag: "趋势",
     },
     {
-      title: "Walmart Marketplace流量暴涨60%",
-      description: "节日季促销活动带动平台整体GMV突破记录。",
+      title: "智能穿戴设备爆品成功要素解析",
+      description: "剖析过去一年智能穿戴品类Top 10产品的共同特征。",
       date: "2025-01-23",
-      stats: { views: "38K", likes: "2.8K" },
+      stats: { views: "178K", likes: "11.2K" },
+      tag: "电子",
+    },
+    {
+      title: "户外露营装备爆品打造指南",
+      description: "从选品到营销，一文读懂如何打造户外类目爆款。",
+      date: "2025-01-22",
+      stats: { views: "92K", likes: "7.4K" },
+      tag: "户外",
+    },
+  ],
+  "new-product-recruitment": [
+    {
+      title: "Amazon 2025春季新品招募计划开启",
+      description: "针对家居、厨房类目，亚马逊推出专项扶持政策。",
+      date: "2025-01-24",
+      stats: { views: "67K", likes: "4.2K" },
+      tag: "政策",
+    },
+    {
+      title: "Walmart新品入驻绿色通道",
+      description: "符合条件的新品牌可享受快速审核及流量扶持。",
+      date: "2025-01-23",
+      stats: { views: "54K", likes: "3.8K" },
+      tag: "入驻",
+    },
+    {
+      title: "Home Depot供应商新品招募",
+      description: "建材、工具类目优质供应商招募计划详解。",
+      date: "2025-01-22",
+      stats: { views: "43K", likes: "2.9K" },
+      tag: "招募",
+    },
+  ],
+  "sample-testing": [
+    {
+      title: "产品样品测试流程全解析",
+      description: "从样品准备到测试报告，完整的测试流程指南。",
+      date: "2025-01-24",
+      stats: { views: "78K", likes: "5.6K" },
+      tag: "流程",
+    },
+    {
+      title: "FBA样品入仓测试注意事项",
+      description: "避免常见错误，确保样品顺利通过亚马逊检测。",
+      date: "2025-01-23",
+      stats: { views: "112K", likes: "8.1K" },
+      tag: "FBA",
+    },
+    {
+      title: "产品合规性测试要求汇总",
+      description: "各大平台对产品安全认证的最新要求整理。",
+      date: "2025-01-22",
+      stats: { views: "95K", likes: "6.7K" },
+      tag: "合规",
+    },
+  ],
+  "recent-platform-performance": [
+    {
+      title: "Amazon Q4销售额同比增长52%",
+      description: "第四季度第三方卖家整体业绩创历史新高。",
+      date: "2025-01-24",
+      stats: { views: "234K", likes: "18.9K" },
+      tag: "业绩",
+    },
+    {
+      title: "Walmart Marketplace月活跃用户突破1.5亿",
+      description: "平台流量持续增长，卖家入驻机会凸显。",
+      date: "2025-01-23",
+      stats: { views: "187K", likes: "14.2K" },
       tag: "数据",
     },
     {
-      title: "亚马逊Prime会员数突破2亿",
-      description: "会员增长推动平台卖家订单量持续攀升。",
+      title: "Home Depot线上销售占比提升至25%",
+      description: "传统建材巨头数字化转型成效显著。",
       date: "2025-01-22",
-      stats: { views: "52K", likes: "4.1K" },
-      tag: "里程碑",
-    },
-  ],
-  "new-products": [
-    {
-      title: "创新厨房小家电系列上线",
-      description: "多功能设计满足现代家庭需求，预售火爆。",
-      date: "2025-01-24",
-      stats: { views: "32K", likes: "2.1K" },
-      tag: "新品",
-    },
-    {
-      title: "环保可降解包装材料首发",
-      description: "响应平台环保政策，该产品获得官方推荐位。",
-      date: "2025-01-23",
-      stats: { views: "28K", likes: "1.9K" },
-      tag: "环保",
-    },
-    {
-      title: "智能宠物喂食器2.0版发布",
-      description: "AI识别技术升级，支持多宠物家庭场景。",
-      date: "2025-01-22",
-      stats: { views: "41K", likes: "3.5K" },
-      tag: "宠物",
-    },
-  ],
-  "viral-videos": [
-    {
-      title: "产品开箱视频24小时播放量破500万",
-      description: "悬念式开箱策略引发用户自发传播热潮。",
-      date: "2025-01-24",
-      stats: { views: "5.2M", likes: "420K" },
-      tag: "爆款",
-    },
-    {
-      title: "工厂探访Vlog引发品牌信任潮",
-      description: "透明化生产流程展示赢得消费者好评如潮。",
-      date: "2025-01-23",
-      stats: { views: "1.2M", likes: "95K" },
-      tag: "内容",
-    },
-    {
-      title: "用户UGC视频合集播放量破千万",
-      description: "品牌鼓励用户生成内容策略取得巨大成功。",
-      date: "2025-01-22",
-      stats: { views: "10.5M", likes: "680K" },
-      tag: "UGC",
+      stats: { views: "156K", likes: "11.8K" },
+      tag: "转型",
     },
   ],
 };
@@ -148,7 +148,7 @@ const trendingTopics = [
 ];
 
 export const Insights = () => {
-  const [activeCategory, setActiveCategory] = useState("hot-products");
+  const [activeCategory, setActiveCategory] = useState("influencer-analysis");
   const currentInsights = insightsData[activeCategory] || [];
 
   return (
