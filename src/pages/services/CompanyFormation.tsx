@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Building2, FileText, CreditCard, CheckCircle2, Globe, Shield, Users, MapPin } from "lucide-react";
+import { ArrowRight, Building2, FileText, CreditCard, CheckCircle2, Globe, Shield, Users, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
 import { ContactModal } from "@/components/landing/ContactModal";
 import { ContactModalProvider, useContactModal } from "@/contexts/ContactModalContext";
 import { cn } from "@/lib/utils";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const regions = [
   { id: "north-america", label: "北美" },
@@ -111,6 +112,20 @@ const countries = {
     },
   ],
 };
+
+const pricingData = [
+  { country: "美国", flag: "🇺🇸", entityType: "LLC", registration: "$599", taxId: "$149", bankAccount: "$299", annual: "$299/年", timeline: "3-5工作日" },
+  { country: "英国", flag: "🇬🇧", entityType: "Ltd", registration: "£399", taxId: "£199", bankAccount: "£249", annual: "£199/年", timeline: "1-2工作日" },
+  { country: "德国", flag: "🇩🇪", entityType: "GmbH/UG", registration: "€1,499", taxId: "€299", bankAccount: "€399", annual: "€599/年", timeline: "2-4周" },
+  { country: "法国", flag: "🇫🇷", entityType: "SAS/SARL", registration: "€1,199", taxId: "€249", bankAccount: "€349", annual: "€499/年", timeline: "2-3周" },
+  { country: "荷兰", flag: "🇳🇱", entityType: "BV", registration: "€1,299", taxId: "€249", bankAccount: "€349", annual: "€549/年", timeline: "1-2周" },
+  { country: "西班牙", flag: "🇪🇸", entityType: "SL", registration: "€999", taxId: "€199", bankAccount: "€299", annual: "€449/年", timeline: "2-3周" },
+  { country: "意大利", flag: "🇮🇹", entityType: "SRL", registration: "€1,099", taxId: "€249", bankAccount: "€349", annual: "€499/年", timeline: "2-4周" },
+  { country: "瑞典", flag: "🇸🇪", entityType: "AB", registration: "€1,399", taxId: "€249", bankAccount: "€399", annual: "€549/年", timeline: "1-2周" },
+  { country: "塞浦路斯", flag: "🇨🇾", entityType: "Ltd", registration: "€899", taxId: "€199", bankAccount: "€299", annual: "€399/年", timeline: "1-2周" },
+  { country: "加拿大", flag: "🇨🇦", entityType: "Corp/Inc", registration: "CAD$799", taxId: "CAD$199", bankAccount: "CAD$349", annual: "CAD$349/年", timeline: "3-5工作日" },
+  { country: "澳大利亚", flag: "🇦🇺", entityType: "Pty Ltd", registration: "AUD$899", taxId: "AUD$199", bankAccount: "AUD$349", annual: "AUD$399/年", timeline: "1-3工作日" },
+];
 
 const services = [
   { icon: Building2, title: "公司注册", description: "各类型实体注册，包括LLC、Ltd、GmbH等。" },
@@ -303,8 +318,85 @@ const CompanyFormationContent = () => {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Pricing Table */}
       <section className="py-24 bg-secondary/30">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              各国注册费用对比
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              透明定价，无隐藏费用。价格可能根据具体需求有所调整。
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-2xl border border-border bg-card overflow-hidden shadow-lg"
+          >
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-primary/5 hover:bg-primary/5">
+                    <TableHead className="font-bold text-foreground min-w-[120px]">国家/地区</TableHead>
+                    <TableHead className="font-bold text-foreground">公司类型</TableHead>
+                    <TableHead className="font-bold text-foreground">公司注册</TableHead>
+                    <TableHead className="font-bold text-foreground">税号申请</TableHead>
+                    <TableHead className="font-bold text-foreground">银行开户</TableHead>
+                    <TableHead className="font-bold text-foreground">年度维护</TableHead>
+                    <TableHead className="font-bold text-foreground">
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        注册周期
+                      </div>
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {pricingData.map((item, index) => (
+                    <TableRow key={item.country} className={index % 2 === 0 ? "bg-background" : "bg-muted/30"}>
+                      <TableCell className="font-medium">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xl">{item.flag}</span>
+                          <span className="text-foreground">{item.country}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-muted-foreground">{item.entityType}</TableCell>
+                      <TableCell className="font-semibold text-primary">{item.registration}</TableCell>
+                      <TableCell className="text-muted-foreground">{item.taxId}</TableCell>
+                      <TableCell className="text-muted-foreground">{item.bankAccount}</TableCell>
+                      <TableCell className="text-muted-foreground">{item.annual}</TableCell>
+                      <TableCell className="text-muted-foreground">{item.timeline}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+            <div className="p-4 bg-muted/30 border-t border-border">
+              <p className="text-sm text-muted-foreground text-center">
+                * 以上价格为基础服务价格，具体费用根据实际需求可能有所调整。欢迎联系我们获取详细报价。
+              </p>
+            </div>
+          </motion.div>
+
+          <div className="text-center mt-8">
+            <Button size="lg" onClick={openModal}>
+              获取定制报价
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="py-24">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

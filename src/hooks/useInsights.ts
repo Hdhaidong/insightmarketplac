@@ -31,7 +31,7 @@ export const useInsights = (category: string) => {
         totalCount: count || 0,
       };
     },
-    getNextPageParam: (lastPage) => lastPage.nextPage,
+    getNextPageParam: (lastPage) => lastPage?.nextPage ?? undefined,
     initialPageParam: 0,
   });
 };
