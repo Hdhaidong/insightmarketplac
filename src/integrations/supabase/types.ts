@@ -76,6 +76,11 @@ export type Database = {
         | "platform-growth"
         | "new-products"
         | "viral-videos"
+        | "influencer-analysis"
+        | "hot-product-analysis"
+        | "new-product-recruitment"
+        | "sample-testing"
+        | "recent-platform-performance"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -209,6 +214,11 @@ export const Constants = {
         "platform-growth",
         "new-products",
         "viral-videos",
+        "influencer-analysis",
+        "hot-product-analysis",
+        "new-product-recruitment",
+        "sample-testing",
+        "recent-platform-performance",
       ],
     },
   },
