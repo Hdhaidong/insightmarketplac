@@ -3,10 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Building2, FileText, CreditCard, CheckCircle2, Globe, Shield, Users, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Header } from "@/components/landing/Header";
-import { Footer } from "@/components/landing/Footer";
-import { ContactModal } from "@/components/landing/ContactModal";
-import { ContactModalProvider, useContactModal } from "@/contexts/ContactModalContext";
+import { PageLayout, useContactModal } from "@/components/layout/PageLayout";
 import { cn } from "@/lib/utils";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
@@ -144,17 +141,15 @@ const steps = [
 ];
 
 const CompanyFormationContent = () => {
-  const { isOpen, closeModal, openModal } = useContactModal();
+  const { openModal } = useContactModal();
   const [activeRegion, setActiveRegion] = useState("north-america");
 
   const currentCountries = countries[activeRegion as keyof typeof countries] || [];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
+    <>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-12 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors">
@@ -451,17 +446,14 @@ const CompanyFormationContent = () => {
           </motion.div>
         </div>
       </section>
-
-      <Footer />
-      <ContactModal isOpen={isOpen} onClose={closeModal} />
-    </div>
+    </>
   );
 };
 
 const CompanyFormation = () => (
-  <ContactModalProvider>
+  <PageLayout>
     <CompanyFormationContent />
-  </ContactModalProvider>
+  </PageLayout>
 );
 
 export default CompanyFormation;

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Header } from "@/components/landing/Header";
-import { Footer } from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { PageLayout } from "@/components/layout/PageLayout";
 import {
   Accordion,
   AccordionContent,
@@ -155,7 +154,7 @@ const faqCategories = [
   }
 ];
 
-const HelpCenter = () => {
+const HelpCenterContent = () => {
   const [selectedCategory, setSelectedCategory] = useState("getting-started");
   const [searchQuery, setSearchQuery] = useState("");
   const [formData, setFormData] = useState({
@@ -216,11 +215,9 @@ const HelpCenter = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
+    <>
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-12 pb-16 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -491,10 +488,14 @@ const HelpCenter = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 };
+
+const HelpCenter = () => (
+  <PageLayout>
+    <HelpCenterContent />
+  </PageLayout>
+);
 
 export default HelpCenter;

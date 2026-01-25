@@ -2,10 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Linkedin, Mail, Award, Globe, Users, Target } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Header } from "@/components/landing/Header";
-import { Footer } from "@/components/landing/Footer";
-import { ContactModal } from "@/components/landing/ContactModal";
-import { ContactModalProvider, useContactModal } from "@/contexts/ContactModalContext";
+import { PageLayout, useContactModal } from "@/components/layout/PageLayout";
 
 const stats = [
   { value: "2015", label: "Founded" },
@@ -61,14 +58,12 @@ const team = [
 ];
 
 const AboutContent = () => {
-  const { isOpen, closeModal, openModal } = useContactModal();
+  const { openModal } = useContactModal();
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
+    <>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-12 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-hero" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <Link to="/" className="inline-flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground mb-8 transition-colors">
@@ -234,17 +229,14 @@ const AboutContent = () => {
           </motion.div>
         </div>
       </section>
-
-      <Footer />
-      <ContactModal isOpen={isOpen} onClose={closeModal} />
-    </div>
+    </>
   );
 };
 
 const About = () => (
-  <ContactModalProvider>
+  <PageLayout>
     <AboutContent />
-  </ContactModalProvider>
+  </PageLayout>
 );
 
 export default About;
