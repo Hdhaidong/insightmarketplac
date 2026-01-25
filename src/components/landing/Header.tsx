@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, ChevronDown, Building2, Truck, Megaphone, ShoppingCart, Store, Home, Wrench } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, Building2, Truck, Megaphone, ShoppingCart, Store, Home, Wrench, Sparkles, ArrowRight, Zap } from "lucide-react";
 import { useContactModal } from "@/contexts/ContactModalContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link } from "react-router-dom";
@@ -138,32 +138,57 @@ export const Header = () => {
                     Services
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {serviceLinks.map((link) => (
-                        <li key={link.href}>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to={link.href}
-                              className={cn(
-                                "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                              )}
-                            >
-                              <div className="flex items-center gap-3">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                                  <link.icon className="h-5 w-5 text-primary" />
+                    <div className="grid gap-3 p-4 md:w-[600px] lg:w-[700px] lg:grid-cols-[1fr_280px]">
+                      {/* Service Links */}
+                      <ul className="grid gap-3">
+                        {serviceLinks.map((link) => (
+                          <li key={link.href}>
+                            <NavigationMenuLink asChild>
+                              <Link
+                                to={link.href}
+                                className={cn(
+                                  "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                )}
+                              >
+                                <div className="flex items-center gap-3">
+                                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                                    <link.icon className="h-5 w-5 text-primary" />
+                                  </div>
+                                  <div>
+                                    <div className="text-sm font-medium leading-none">{link.label}</div>
+                                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
+                                      {link.description}
+                                    </p>
+                                  </div>
                                 </div>
-                                <div>
-                                  <div className="text-sm font-medium leading-none">{link.label}</div>
-                                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
-                                    {link.description}
-                                  </p>
-                                </div>
-                              </div>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                    </ul>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                      
+                      {/* Featured CTA Banner */}
+                      <div className="rounded-xl bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 p-4 border border-primary/20">
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+                            <Sparkles className="h-4 w-4 text-primary-foreground" />
+                          </div>
+                          <span className="text-xs font-semibold text-primary uppercase tracking-wide">Featured</span>
+                        </div>
+                        <h4 className="font-bold text-foreground mb-2">Free Launch Assessment</h4>
+                        <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                          Get a personalized roadmap for your US marketplace expansion.
+                        </p>
+                        <Button 
+                          size="sm" 
+                          className="w-full group"
+                          onClick={openModal}
+                        >
+                          Get Started
+                          <ArrowRight className="h-3.5 w-3.5 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                        </Button>
+                      </div>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
@@ -173,32 +198,62 @@ export const Header = () => {
                     Marketplaces
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {marketplaceLinks.map((link) => (
-                        <li key={link.href}>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to={link.href}
-                              className={cn(
-                                "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                              )}
-                            >
-                              <div className="flex items-center gap-3">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                                  <link.icon className="h-5 w-5 text-primary" />
+                    <div className="grid gap-3 p-4 md:w-[650px] lg:w-[750px] lg:grid-cols-[1fr_260px]">
+                      {/* Marketplace Links */}
+                      <ul className="grid grid-cols-2 gap-3">
+                        {marketplaceLinks.map((link) => (
+                          <li key={link.href}>
+                            <NavigationMenuLink asChild>
+                              <Link
+                                to={link.href}
+                                className={cn(
+                                  "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                )}
+                              >
+                                <div className="flex items-center gap-3">
+                                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                                    <link.icon className="h-5 w-5 text-primary" />
+                                  </div>
+                                  <div>
+                                    <div className="text-sm font-medium leading-none">{link.label}</div>
+                                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
+                                      {link.description}
+                                    </p>
+                                  </div>
                                 </div>
-                                <div>
-                                  <div className="text-sm font-medium leading-none">{link.label}</div>
-                                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
-                                    {link.description}
-                                  </p>
-                                </div>
-                              </div>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                    </ul>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                      
+                      {/* Featured Promo Banner */}
+                      <div className="rounded-xl bg-gradient-to-br from-accent/15 via-primary/10 to-accent/5 p-4 border border-accent/20">
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent">
+                            <Zap className="h-4 w-4 text-accent-foreground" />
+                          </div>
+                          <span className="text-xs font-semibold text-accent uppercase tracking-wide">New</span>
+                        </div>
+                        <h4 className="font-bold text-foreground mb-2">Multi-Platform Launch</h4>
+                        <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+                          Launch on Amazon, Walmart & Home Depot simultaneously with our bundle offer.
+                        </p>
+                        <div className="flex items-baseline gap-2 mb-3">
+                          <span className="text-2xl font-bold text-foreground">20%</span>
+                          <span className="text-sm text-muted-foreground">discount</span>
+                        </div>
+                        <Button 
+                          size="sm" 
+                          variant="outline"
+                          className="w-full border-accent text-accent hover:bg-accent hover:text-accent-foreground group"
+                          onClick={openModal}
+                        >
+                          Learn More
+                          <ArrowRight className="h-3.5 w-3.5 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                        </Button>
+                      </div>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               </NavigationMenuList>
