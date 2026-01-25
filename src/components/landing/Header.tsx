@@ -16,10 +16,10 @@ import {
 import { cn } from "@/lib/utils";
 
 const sectionLinks = [
-  { label: "Results", href: "#results" },
-  { label: "Insights", href: "#insights" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Results", href: "/results" },
+  { label: "Insights", href: "/insights" },
+  { label: "Testimonials", href: "/testimonials" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 const marketplaceLinks = [
@@ -348,25 +348,13 @@ export const Header = () => {
 
             {/* Section Links */}
             {sectionLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className={`relative text-sm font-medium transition-colors ${
-                  activeSection === link.href.replace("#", "")
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                to={link.href}
+                className="relative text-sm font-medium transition-colors text-muted-foreground hover:text-foreground"
               >
                 {link.label}
-                {activeSection === link.href.replace("#", "") && (
-                  <motion.div
-                    layoutId="activeSection"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </a>
+              </Link>
             ))}
           </nav>
 
