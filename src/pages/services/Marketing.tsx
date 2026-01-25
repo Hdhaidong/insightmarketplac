@@ -2,10 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, TrendingUp, Target, Search, FileText, BarChart3, Megaphone } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Header } from "@/components/landing/Header";
-import { Footer } from "@/components/landing/Footer";
-import { ContactModal } from "@/components/landing/ContactModal";
-import { ContactModalProvider, useContactModal } from "@/contexts/ContactModalContext";
+import { PageLayout, useContactModal } from "@/components/layout/PageLayout";
 
 const services = [
   { icon: Target, title: "PPC Management", description: "Data-driven Sponsored Products, Brands, and Display campaigns across all marketplaces." },
@@ -24,14 +21,12 @@ const stats = [
 ];
 
 const MarketingContent = () => {
-  const { isOpen, closeModal, openModal } = useContactModal();
+  const { openModal } = useContactModal();
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
+    <>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-12 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-background to-background" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors">
@@ -149,17 +144,14 @@ const MarketingContent = () => {
           </motion.div>
         </div>
       </section>
-
-      <Footer />
-      <ContactModal isOpen={isOpen} onClose={closeModal} />
-    </div>
+    </>
   );
 };
 
 const Marketing = () => (
-  <ContactModalProvider>
+  <PageLayout>
     <MarketingContent />
-  </ContactModalProvider>
+  </PageLayout>
 );
 
 export default Marketing;

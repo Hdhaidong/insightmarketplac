@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Header } from "@/components/landing/Header";
-import { Footer } from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { PageLayout } from "@/components/layout/PageLayout";
 import {
   Search,
   Calendar,
@@ -138,7 +137,7 @@ const articles = [
   }
 ];
 
-const Blog = () => {
+const BlogContent = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -153,11 +152,9 @@ const Blog = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
+    <>
       {/* Hero Section */}
-      <section className="pt-32 pb-12 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-12 pb-12 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -361,10 +358,14 @@ const Blog = () => {
           </motion.div>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 };
+
+const Blog = () => (
+  <PageLayout>
+    <BlogContent />
+  </PageLayout>
+);
 
 export default Blog;
