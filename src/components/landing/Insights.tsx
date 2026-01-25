@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useInsights } from "@/hooks/useInsights";
 import { InsightCard } from "./insights/InsightCard";
@@ -9,7 +9,18 @@ import { CategoryTabs } from "./insights/CategoryTabs";
 
 export const Insights = () => {
   const [activeCategory, setActiveCategory] = useState("influencer-analysis");
-  const { data: insights, isLoading, error } = useInsights(activeCategory);
+  const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInsights(activeCategory);
+
+  // Flatten all pages into a single array
+  const allInsights = data?.pages.flatMap((page) => page.data) || [];
+  const totalCount = data?.pages[0]?.totalCount || 0;
 
   return (
     <section id="insights" className="py-24 bg-secondary/30">
@@ -40,6 +51,13 @@ export const Insights = () => {
               onCategoryChange={setActiveCategory}
             />
 
+            {/* Results Count */}
+            {!isLoading && totalCount > 0 && (
+              <p className="text-sm text-muted-foreground mb-4">
+                共 {totalCount} 条洞察，已加载 {allInsights.length} 条
+              </p>
+            )}
+
             {/* Insights List */}
             <div className="space-y-4 min-h-[300px]">
               {isLoading ? (
@@ -51,8 +69,8 @@ export const Insights = () => {
                 <div className="text-center py-12">
                   <p className="text-destructive">加载失败，请稍后重试</p>
                 </div>
-              ) : insights && insights.length > 0 ? (
-                insights.map((insight, index) => (
+              ) : allInsights.length > 0 ? (
+                allInsights.map((insight, index) => (
                   <InsightCard key={insight.id} insight={insight} index={index} />
                 ))
               ) : (
@@ -62,13 +80,35 @@ export const Insights = () => {
               )}
             </div>
 
+            {/* Load More Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-8"
+              className="mt-8 flex flex-col sm:flex-row gap-4"
             >
+              {hasNextPage && (
+                <Button
+                  variant="default"
+                  size="lg"
+                  onClick={() => fetchNextPage()}
+                  disabled={isFetchingNextPage}
+                  className="group"
+                >
+                  {isFetchingNextPage ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      加载中...
+                    </>
+                  ) : (
+                    <>
+                      加载更多
+                      <ChevronDown className="w-4 h-4 ml-2 group-hover:translate-y-1 transition-transform" />
+                    </>
+                  )}
+                </Button>
+              )}
               <Button variant="outline" size="lg" className="group">
                 查看全部洞察
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
