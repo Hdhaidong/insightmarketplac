@@ -14,7 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      insights: {
+        Row: {
+          category: Database["public"]["Enums"]["insight_category"]
+          created_at: string
+          description: string
+          id: string
+          image_url: string | null
+          is_featured: boolean
+          likes_count: string
+          published_date: string
+          search_vector: unknown
+          tag: string
+          title: string
+          updated_at: string
+          views_count: string
+        }
+        Insert: {
+          category: Database["public"]["Enums"]["insight_category"]
+          created_at?: string
+          description: string
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean
+          likes_count?: string
+          published_date?: string
+          search_vector?: unknown
+          tag: string
+          title: string
+          updated_at?: string
+          views_count?: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["insight_category"]
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean
+          likes_count?: string
+          published_date?: string
+          search_vector?: unknown
+          tag?: string
+          title?: string
+          updated_at?: string
+          views_count?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +70,12 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      insight_category:
+        | "hot-products"
+        | "influencers"
+        | "platform-growth"
+        | "new-products"
+        | "viral-videos"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +202,14 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      insight_category: [
+        "hot-products",
+        "influencers",
+        "platform-growth",
+        "new-products",
+        "viral-videos",
+      ],
+    },
   },
 } as const
