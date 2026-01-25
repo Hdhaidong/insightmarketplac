@@ -10,7 +10,7 @@ const categories = [
   { id: "influencer-analysis", label: "网红分析", icon: Users },
   { id: "hot-product-analysis", label: "爆品分析", icon: Flame },
   { id: "new-product-recruitment", label: "新品招募", icon: Target },
-  { id: "sample-testing", label: "样品测试", icon: TestTube },
+  { id: "sample-testing", label: "样品测评", icon: TestTube },
   { id: "recent-platform-performance", label: "平台近期业绩", icon: BarChart3 },
 ];
 
