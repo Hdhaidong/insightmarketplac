@@ -43,7 +43,7 @@ const faqs = [
 
 export const FAQ = () => {
   return (
-    <section className="py-24 bg-subtle">
+    <section id="faq" className="py-24 bg-subtle">
       <div className="container mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
