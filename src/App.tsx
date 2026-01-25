@@ -21,6 +21,7 @@ import Marketing from "./pages/services/Marketing";
 // Other Pages
 import CaseStudiesPage from "./pages/CaseStudiesPage";
 import About from "./pages/About";
+import HelpCenter from "./pages/HelpCenter";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,7 @@ const App = () => (
             
             {/* Other Pages */}
             <Route path="/case-studies" element={<CaseStudiesPage />} />
+            <Route path="/help" element={<HelpCenter />} />
             <Route path="/about" element={<About />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
