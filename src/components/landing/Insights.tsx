@@ -12,6 +12,7 @@ const categories = [
   { id: "new-product-recruitment", label: "新品招募", icon: Target },
   { id: "sample-testing", label: "样品测评", icon: TestTube },
   { id: "recent-platform-performance", label: "平台近期业绩", icon: BarChart3 },
+  { id: "viral-videos", label: "爆红视频", icon: PlayCircle },
 ];
 
 const insightsData: Record<string, Array<{
@@ -135,6 +136,29 @@ const insightsData: Record<string, Array<{
       date: "2025-01-22",
       stats: { views: "156K", likes: "11.8K" },
       tag: "转型",
+    },
+  ],
+  "viral-videos": [
+    {
+      title: "产品开箱视频24小时播放量破500万",
+      description: "悬念式开箱策略引发用户自发传播热潮。",
+      date: "2025-01-24",
+      stats: { views: "5.2M", likes: "420K" },
+      tag: "爆款",
+    },
+    {
+      title: "工厂探访Vlog引发品牌信任潮",
+      description: "透明化生产流程展示赢得消费者好评如潮。",
+      date: "2025-01-23",
+      stats: { views: "1.2M", likes: "95K" },
+      tag: "内容",
+    },
+    {
+      title: "用户UGC视频合集播放量破千万",
+      description: "品牌鼓励用户生成内容策略取得巨大成功。",
+      date: "2025-01-22",
+      stats: { views: "10.5M", likes: "680K" },
+      tag: "UGC",
     },
   ],
 };
