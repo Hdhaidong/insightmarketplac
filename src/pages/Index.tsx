@@ -4,6 +4,7 @@ import { MarketplaceLogos } from "@/components/landing/MarketplaceLogos";
 import { Services } from "@/components/landing/Services";
 import { Results } from "@/components/landing/Results";
 import { CaseStudies } from "@/components/landing/CaseStudies";
+import { Testimonials } from "@/components/landing/Testimonials";
 import { Process } from "@/components/landing/Process";
 import { FAQ } from "@/components/landing/FAQ";
 import { CTA } from "@/components/landing/CTA";
@@ -18,6 +19,7 @@ const Index = () => {
       <Services />
       <Results />
       <CaseStudies />
+      <Testimonials />
       <Process />
       <FAQ />
       <CTA />
