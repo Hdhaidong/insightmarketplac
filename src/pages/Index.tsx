@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Header } from "@/components/landing/Header";
 import { Hero } from "@/components/landing/Hero";
 import { MarketplaceLogos } from "@/components/landing/MarketplaceLogos";
@@ -8,6 +7,7 @@ import { Timeline } from "@/components/landing/Timeline";
 import { OmnichannelBenefits } from "@/components/landing/OmnichannelBenefits";
 import { Results } from "@/components/landing/Results";
 import { CaseStudies } from "@/components/landing/CaseStudies";
+import { AmazonTopBrands } from "@/components/landing/AmazonTopBrands";
 import { Insights } from "@/components/landing/Insights";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { Process } from "@/components/landing/Process";
@@ -31,6 +31,7 @@ const IndexContent = () => {
       <OmnichannelBenefits />
       <Results />
       <CaseStudies />
+      <AmazonTopBrands />
       <Insights />
       <Testimonials />
       <Process />
