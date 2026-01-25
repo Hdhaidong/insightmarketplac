@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
+import { useContactModal } from "@/contexts/ContactModalContext";
 
 const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Marketplaces", href: "#marketplaces" },
   { label: "Results", href: "#results" },
+  { label: "Insights", href: "#insights" },
   { label: "Testimonials", href: "#testimonials" },
-  { label: "Process", href: "#process" },
   { label: "FAQ", href: "#faq" },
 ];
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const { openModal } = useContactModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +45,7 @@ export const Header = () => {
     const targetId = href.replace("#", "");
     const element = document.getElementById(targetId);
     if (element) {
-      const offsetTop = element.offsetTop - 80; // Account for fixed header
+      const offsetTop = element.offsetTop - 80;
       window.scrollTo({
         top: offsetTop,
         behavior: "smooth",
@@ -91,8 +93,11 @@ export const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost">Contact</Button>
-            <Button variant="default">Get Started</Button>
+            <Button variant="ghost" onClick={openModal}>
+              <Phone className="w-4 h-4 mr-2" />
+              Book a Call
+            </Button>
+            <Button variant="default" onClick={openModal}>Get Started</Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -130,8 +135,13 @@ export const Header = () => {
               </a>
             ))}
             <div className="flex flex-col gap-2 pt-4 border-t border-border">
-              <Button variant="ghost" className="w-full">Contact</Button>
-              <Button variant="default" className="w-full">Get Started</Button>
+              <Button variant="ghost" className="w-full" onClick={() => { openModal(); setIsMenuOpen(false); }}>
+                <Phone className="w-4 h-4 mr-2" />
+                Book a Call
+              </Button>
+              <Button variant="default" className="w-full" onClick={() => { openModal(); setIsMenuOpen(false); }}>
+                Get Started
+              </Button>
             </div>
           </nav>
         </motion.div>

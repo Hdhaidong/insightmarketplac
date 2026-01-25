@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
+import { useContactModal } from "@/contexts/ContactModalContext";
 
 export const Hero = () => {
+  const { openModal } = useContactModal();
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background */}
@@ -67,7 +70,7 @@ export const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button variant="hero" size="lg" className="w-full sm:w-auto">
+            <Button variant="hero" size="lg" className="w-full sm:w-auto" onClick={openModal}>
               Start Your Expansion
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
