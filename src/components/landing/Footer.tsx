@@ -1,27 +1,24 @@
 import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const footerLinks = {
   services: [
-    "Marketplace Launch",
-    "Performance Marketing",
-    "Fulfillment & Logistics",
-    "Account Management",
-    "US Market Entry",
+    { label: "Company Formation", href: "/services/company-formation" },
+    { label: "Performance Marketing", href: "/services/marketing" },
+    { label: "Fulfillment & Logistics", href: "/services/fulfillment" },
+    { label: "Case Studies", href: "/case-studies" },
   ],
   marketplaces: [
-    "Amazon",
-    "Walmart",
-    "Home Depot",
-    "Lowe's",
-    "Target",
-    "eBay",
+    { label: "Amazon", href: "/marketplace/amazon" },
+    { label: "Walmart", href: "/marketplace/walmart" },
+    { label: "Home Depot", href: "/marketplace/home-depot" },
+    { label: "Lowe's", href: "/marketplace/lowes" },
   ],
   company: [
-    "About Us",
-    "Careers",
-    "Case Studies",
-    "Blog",
-    "Contact",
+    { label: "About Us", href: "/about" },
+    { label: "Case Studies", href: "/case-studies" },
+    { label: "Careers", href: "/about" },
+    { label: "Contact", href: "/about" },
   ],
 };
 
@@ -32,12 +29,12 @@ export const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <a href="/" className="flex items-center gap-2 mb-6">
+            <Link to="/" className="flex items-center gap-2 mb-6">
               <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
                 <span className="text-accent-foreground font-bold text-lg">M</span>
               </div>
               <span className="font-bold text-xl">MarketPro</span>
-            </a>
+            </Link>
             <p className="text-primary-foreground/70 mb-6 max-w-sm leading-relaxed">
               Your strategic partner for marketplace success. We help brands launch, 
               grow, and dominate on major retail platforms.
@@ -60,10 +57,10 @@ export const Footer = () => {
             <h4 className="font-semibold text-lg mb-4">Services</h4>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
-                    {link}
-                  </a>
+                <li key={link.label}>
+                  <Link to={link.href} className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -74,10 +71,10 @@ export const Footer = () => {
             <h4 className="font-semibold text-lg mb-4">Marketplaces</h4>
             <ul className="space-y-3">
               {footerLinks.marketplaces.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
-                    {link}
-                  </a>
+                <li key={link.label}>
+                  <Link to={link.href} className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -88,10 +85,10 @@ export const Footer = () => {
             <h4 className="font-semibold text-lg mb-4">Company</h4>
             <ul className="space-y-3 mb-6">
               {footerLinks.company.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
-                    {link}
-                  </a>
+                <li key={link.label}>
+                  <Link to={link.href} className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
