@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, ChevronDown, Building2, Truck, Megaphone, ShoppingCart, Store, Home, Wrench, Sparkles, ArrowRight, Zap } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, Building2, Truck, Megaphone, ShoppingCart, Store, Home, Wrench, Sparkles, ArrowRight, Zap, BookOpen, FileText, HelpCircle, Newspaper } from "lucide-react";
 import { useContactModal } from "@/contexts/ContactModalContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link } from "react-router-dom";
@@ -67,6 +67,33 @@ const serviceLinks = [
     href: "/services/marketing",
     icon: Megaphone,
     description: "Strategic campaigns to boost your marketplace visibility"
+  },
+];
+
+const resourceLinks = [
+  { 
+    label: "Blog", 
+    href: "/blog",
+    icon: Newspaper,
+    description: "Latest insights and industry trends"
+  },
+  { 
+    label: "Case Studies", 
+    href: "/case-studies",
+    icon: FileText,
+    description: "Success stories from our partners"
+  },
+  { 
+    label: "Documentation", 
+    href: "/docs",
+    icon: BookOpen,
+    description: "Guides and API references"
+  },
+  { 
+    label: "Help Center", 
+    href: "/help",
+    icon: HelpCircle,
+    description: "FAQs and support resources"
   },
 ];
 
@@ -256,6 +283,66 @@ export const Header = () => {
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
+
+                {/* Resources Mega Menu */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground data-[state=open]:text-foreground">
+                    Resources
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid gap-3 p-4 md:w-[500px] lg:w-[600px] lg:grid-cols-[1fr_220px]">
+                      {/* Resource Links */}
+                      <ul className="grid grid-cols-2 gap-3">
+                        {resourceLinks.map((link) => (
+                          <li key={link.href}>
+                            <NavigationMenuLink asChild>
+                              <Link
+                                to={link.href}
+                                className={cn(
+                                  "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                )}
+                              >
+                                <div className="flex items-center gap-3">
+                                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                                    <link.icon className="h-5 w-5 text-primary" />
+                                  </div>
+                                  <div>
+                                    <div className="text-sm font-medium leading-none">{link.label}</div>
+                                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
+                                      {link.description}
+                                    </p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                      
+                      {/* Newsletter CTA */}
+                      <div className="rounded-xl bg-gradient-to-br from-primary/10 via-accent/5 to-primary/5 p-4 border border-primary/20">
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+                            <Newspaper className="h-4 w-4 text-primary-foreground" />
+                          </div>
+                        </div>
+                        <h4 className="font-bold text-foreground mb-2">Stay Updated</h4>
+                        <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                          Get weekly marketplace insights and growth tips.
+                        </p>
+                        <Button 
+                          size="sm" 
+                          variant="outline"
+                          className="w-full group"
+                          onClick={openModal}
+                        >
+                          Subscribe
+                          <ArrowRight className="h-3.5 w-3.5 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                        </Button>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
 
@@ -359,6 +446,37 @@ export const Header = () => {
               {expandedMobileMenu === "marketplaces" && (
                 <div className="pl-4 flex flex-col gap-1">
                   {marketplaceLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="py-3 flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+                        <link.icon className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium">{link.label}</div>
+                        <p className="text-xs text-muted-foreground line-clamp-1">{link.description}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Resources Accordion */}
+            <div>
+              <button
+                onClick={() => toggleMobileSubmenu("resources")}
+                className="flex items-center justify-between w-full py-2 font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Resources
+                <ChevronDown className={`h-4 w-4 transition-transform ${expandedMobileMenu === "resources" ? "rotate-180" : ""}`} />
+              </button>
+              {expandedMobileMenu === "resources" && (
+                <div className="pl-4 flex flex-col gap-1">
+                  {resourceLinks.map((link) => (
                     <Link
                       key={link.href}
                       to={link.href}
