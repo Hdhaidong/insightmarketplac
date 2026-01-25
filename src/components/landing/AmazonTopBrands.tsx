@@ -1,5 +1,21 @@
-import { motion } from "framer-motion";
-import { TrendingUp, Award, Star, BarChart3, Crown } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { TrendingUp, Award, Star, Crown, Zap, Home, Dumbbell, Dog, UtensilsCrossed, Baby, Car, Flower2, Shield, Shirt } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const categories = [
+  { id: "all", label: "全部品类", icon: Crown },
+  { id: "电子配件", label: "电子配件", icon: Zap },
+  { id: "家居用品", label: "家居用品", icon: Home },
+  { id: "健身器材", label: "健身器材", icon: Dumbbell },
+  { id: "宠物用品", label: "宠物用品", icon: Dog },
+  { id: "厨房用品", label: "厨房用品", icon: UtensilsCrossed },
+  { id: "母婴用品", label: "母婴用品", icon: Baby },
+  { id: "汽车配件", label: "汽车配件", icon: Car },
+  { id: "园艺工具", label: "园艺工具", icon: Flower2 },
+  { id: "安防设备", label: "安防设备", icon: Shield },
+  { id: "时尚配饰", label: "时尚配饰", icon: Shirt },
+];
 
 const topBrands = [
   {
@@ -105,6 +121,11 @@ const topBrands = [
 ];
 
 export const AmazonTopBrands = () => {
+  const [activeCategory, setActiveCategory] = useState("all");
+
+  const filteredBrands = activeCategory === "all"
+    ? topBrands
+    : topBrands.filter(brand => brand.category === activeCategory);
   return (
     <section className="py-24 bg-secondary/30">
       <div className="container mx-auto px-6 lg:px-8">
@@ -127,54 +148,96 @@ export const AmazonTopBrands = () => {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {topBrands.map((brand, index) => (
-            <motion.div
-              key={brand.brand}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="group relative p-5 rounded-2xl border border-border bg-card hover:border-primary/30 hover:shadow-xl transition-all duration-300"
+        {/* Category Filter Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex flex-wrap justify-center gap-2 mb-12"
+        >
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={cn(
+                "flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
+                activeCategory === category.id
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-primary/50"
+              )}
             >
-              {/* Rank Badge */}
-              <div className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg">
-                <span className="text-xs font-bold text-primary-foreground">#{brand.rank}</span>
-              </div>
-
-              {/* Brand Header */}
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">{brand.logo}</span>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-base font-bold text-foreground truncate">{brand.brand}</h3>
-                  <p className="text-xs text-muted-foreground">{brand.category}</p>
-                </div>
-              </div>
-
-              {/* Current Ranking */}
-              <div className="flex items-center gap-2 mb-3 p-2 rounded-lg bg-primary/5">
-                <Award className="w-4 h-4 text-primary shrink-0" />
-                <span className="text-xs font-medium text-primary truncate">{brand.currentRanking}</span>
-              </div>
-
-              {/* Growth */}
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-1">
-                  <TrendingUp className="w-4 h-4 text-accent" />
-                  <span className="text-sm font-bold text-accent">{brand.growth}</span>
-                </div>
-                <span className="text-xs text-muted-foreground">{brand.yearAchieved}</span>
-              </div>
-
-              {/* Achievement */}
-              <div className="flex items-start gap-2 pt-3 border-t border-border">
-                <Star className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
-                <p className="text-xs text-muted-foreground leading-relaxed">{brand.achievement}</p>
-              </div>
-            </motion.div>
+              <category.icon className="w-4 h-4" />
+              {category.label}
+            </button>
           ))}
-        </div>
+        </motion.div>
 
+        {/* Results Count */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center text-sm text-muted-foreground mb-6"
+        >
+          共 {filteredBrands.length} 个品牌
+          {activeCategory !== "all" && ` · ${activeCategory}`}
+        </motion.p>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4"
+          >
+            {filteredBrands.map((brand, index) => (
+              <motion.div
+                key={brand.brand}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="group relative p-5 rounded-2xl border border-border bg-card hover:border-primary/30 hover:shadow-xl transition-all duration-300"
+              >
+                {/* Rank Badge */}
+                <div className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg">
+                  <span className="text-xs font-bold text-primary-foreground">#{brand.rank}</span>
+                </div>
+
+                {/* Brand Header */}
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">{brand.logo}</span>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base font-bold text-foreground truncate">{brand.brand}</h3>
+                    <p className="text-xs text-muted-foreground">{brand.category}</p>
+                  </div>
+                </div>
+
+                {/* Current Ranking */}
+                <div className="flex items-center gap-2 mb-3 p-2 rounded-lg bg-primary/5">
+                  <Award className="w-4 h-4 text-primary shrink-0" />
+                  <span className="text-xs font-medium text-primary truncate">{brand.currentRanking}</span>
+                </div>
+
+                {/* Growth */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-1">
+                    <TrendingUp className="w-4 h-4 text-accent" />
+                    <span className="text-sm font-bold text-accent">{brand.growth}</span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">{brand.yearAchieved}</span>
+                </div>
+
+                {/* Achievement */}
+                <div className="flex items-start gap-2 pt-3 border-t border-border">
+                  <Star className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                  <p className="text-xs text-muted-foreground leading-relaxed">{brand.achievement}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
         {/* Summary Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
