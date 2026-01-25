@@ -28,6 +28,14 @@ import InsightsPage from "./pages/InsightsPage";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import FAQPage from "./pages/FAQPage";
 
+// Section Pages
+import ServicesPage from "./pages/ServicesPage";
+import GoodFitPage from "./pages/GoodFitPage";
+import TimelinePage from "./pages/TimelinePage";
+import OmnichannelPage from "./pages/OmnichannelPage";
+import TopBrandsPage from "./pages/TopBrandsPage";
+import ProcessPage from "./pages/ProcessPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -61,6 +69,14 @@ const App = () => (
             <Route path="/insights" element={<InsightsPage />} />
             <Route path="/testimonials" element={<TestimonialsPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            
+            {/* Section Pages */}
+            <Route path="/services-overview" element={<ServicesPage />} />
+            <Route path="/good-fit" element={<GoodFitPage />} />
+            <Route path="/timeline" element={<TimelinePage />} />
+            <Route path="/omnichannel" element={<OmnichannelPage />} />
+            <Route path="/top-brands" element={<TopBrandsPage />} />
+            <Route path="/process" element={<ProcessPage />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
