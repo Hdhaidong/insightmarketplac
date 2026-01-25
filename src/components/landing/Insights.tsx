@@ -4,12 +4,14 @@ import { Flame, Users, TrendingUp, Package, PlayCircle, ArrowRight, Calendar, Cl
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+import { Search, Target, TestTube, BarChart3 } from "lucide-react";
+
 const categories = [
-  { id: "hot-products", label: "爆品洞察", icon: Flame },
-  { id: "influencers", label: "爆红网红", icon: Users },
-  { id: "platform-growth", label: "平台业绩爆发", icon: TrendingUp },
-  { id: "new-products", label: "新发布产品", icon: Package },
-  { id: "viral-videos", label: "新发布爆红视频", icon: PlayCircle },
+  { id: "influencer-analysis", label: "网红分析", icon: Users },
+  { id: "hot-product-analysis", label: "爆品分析", icon: Flame },
+  { id: "new-product-recruitment", label: "新品招募", icon: Target },
+  { id: "sample-testing", label: "样品测试", icon: TestTube },
+  { id: "recent-platform-performance", label: "平台近期业绩", icon: BarChart3 },
 ];
 
 const insightsData: Record<string, Array<{
