@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle } from "lucide-react";
+import { useContactModal } from "@/contexts/ContactModalContext";
 
 const benefits = [
   "Free marketplace audit",
@@ -10,6 +11,8 @@ const benefits = [
 ];
 
 export const CTA = () => {
+  const { openModal } = useContactModal();
+
   return (
     <section className="py-24 bg-subtle">
       <div className="container mx-auto px-6 lg:px-8">
@@ -45,7 +48,7 @@ export const CTA = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button variant="hero" size="lg">
+                <Button variant="hero" size="lg" onClick={openModal}>
                   Schedule a Consultation
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>

@@ -1,14 +1,55 @@
 import { motion } from "framer-motion";
 
 const marketplaces = [
-  { name: "Amazon", icon: "🛒" },
-  { name: "Walmart", icon: "🏪" },
-  { name: "Home Depot", icon: "🏠" },
-  { name: "Lowe's", icon: "🔧" },
-  { name: "Target", icon: "🎯" },
-  { name: "eBay", icon: "📦" },
-  { name: "Best Buy", icon: "💻" },
-  { name: "Wayfair", icon: "🛋️" },
+  { 
+    name: "Amazon", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+    width: "100px"
+  },
+  { 
+    name: "Walmart", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg",
+    width: "110px"
+  },
+  { 
+    name: "Home Depot", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/5f/TheHomeDepot.svg",
+    width: "55px"
+  },
+  { 
+    name: "Lowe's", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/d/df/Lowe%27s_Companies_Logo.svg",
+    width: "85px"
+  },
+  { 
+    name: "Target", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Target_logo.svg",
+    width: "45px"
+  },
+  { 
+    name: "eBay", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg",
+    width: "75px"
+  },
+  { 
+    name: "Best Buy", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Best_Buy_Logo.svg",
+    width: "70px"
+  },
+  { 
+    name: "Wayfair", 
+    logo: "https://upload.wikimedia.org/wikipedia/commons/6/62/Wayfair_logo.svg",
+    width: "90px"
+  },
+];
+
+const brandPartners = [
+  { name: "Under Armour", initials: "UA" },
+  { name: "Adidas", initials: "AD" },
+  { name: "Pandora", initials: "PA" },
+  { name: "Stanley", initials: "ST" },
+  { name: "DeWalt", initials: "DW" },
+  { name: "Milwaukee", initials: "ML" },
 ];
 
 export const MarketplaceLogos = () => {
@@ -30,7 +71,8 @@ export const MarketplaceLogos = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6">
+        {/* Marketplace Logos */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 mb-16">
           {marketplaces.map((marketplace, index) => (
             <motion.div
               key={marketplace.name}
@@ -40,17 +82,57 @@ export const MarketplaceLogos = () => {
               transition={{ duration: 0.4, delay: index * 0.05 }}
               className="group"
             >
-              <div className="flex flex-col items-center justify-center p-6 rounded-xl border border-border bg-card hover:border-primary/30 hover:shadow-card transition-all duration-300">
-                <span className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                  {marketplace.icon}
-                </span>
-                <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+              <div className="flex flex-col items-center justify-center h-24 p-4 rounded-xl border border-border bg-card hover:border-primary/30 hover:shadow-card transition-all duration-300">
+                <img 
+                  src={marketplace.logo} 
+                  alt={marketplace.name}
+                  className="opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+                  style={{ width: marketplace.width, height: 'auto', maxHeight: '40px', objectFit: 'contain' }}
+                  onError={(e) => {
+                    // Fallback to text if logo fails to load
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                  }}
+                />
+                <span className="hidden text-sm font-bold text-muted-foreground group-hover:text-foreground">
                   {marketplace.name}
                 </span>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Valued Customers / Brand Partners */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="pt-12 border-t border-border"
+        >
+          <p className="text-center text-muted-foreground font-medium uppercase tracking-wider text-sm mb-8">
+            Our Valued Customers — Proud to serve leading brands
+          </p>
+          
+          <div className="flex flex-wrap items-center justify-center gap-8">
+            {brandPartners.map((brand, index) => (
+              <motion.div
+                key={brand.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                className="group"
+              >
+                <div className="w-24 h-12 rounded-lg bg-secondary/50 border border-border flex items-center justify-center hover:border-primary/30 hover:bg-secondary transition-all duration-300">
+                  <span className="text-lg font-bold text-muted-foreground group-hover:text-foreground tracking-wider">
+                    {brand.initials}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
