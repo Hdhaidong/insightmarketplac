@@ -129,8 +129,80 @@ const TargetContent = () => {
         </div>
       </section>
 
-      {/* Requirements Section */}
+      {/* Success Stories Section */}
       <section className="py-24 bg-secondary/30">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              Target Plus Success Stories
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              See how leading brands achieved exceptional growth on Target Plus.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                brand: "Reebok",
+                logo: "R",
+                highlight: "6,500",
+                highlightLabel: "Peak Daily Orders",
+                description: "Achieved record-breaking daily order volume through optimized inventory management and strategic pricing.",
+                growth: "+340% YoY Revenue",
+              },
+              {
+                brand: "Cuisinart",
+                logo: "C",
+                highlight: "$12M+",
+                highlightLabel: "Annual Revenue",
+                description: "Expanded kitchen appliance catalog to 200+ SKUs with exclusive Target Plus positioning.",
+                growth: "+180% Category Share",
+              },
+              {
+                brand: "Schwinn",
+                logo: "S",
+                highlight: "15x",
+                highlightLabel: "Traffic Growth",
+                description: "Leveraged Target's seasonal promotions to capture peak demand during key shopping periods.",
+                growth: "+250% Conversion Rate",
+              },
+            ].map((story, index) => (
+              <motion.div
+                key={story.brand}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-6 rounded-2xl bg-card border border-border hover:border-[#CC0000]/30 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#CC0000] flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">{story.logo}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-foreground">{story.brand}</h3>
+                    <span className="text-sm text-[#CC0000] font-medium">{story.growth}</span>
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <div className="text-3xl font-bold text-[#CC0000]">{story.highlight}</div>
+                  <div className="text-sm text-muted-foreground">{story.highlightLabel}</div>
+                </div>
+                <p className="text-muted-foreground text-sm">{story.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Requirements Section */}
+      <section className="py-24">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
