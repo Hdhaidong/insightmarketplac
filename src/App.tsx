@@ -12,6 +12,7 @@ import Amazon from "./pages/marketplace/Amazon";
 import Walmart from "./pages/marketplace/Walmart";
 import HomeDepot from "./pages/marketplace/HomeDepot";
 import Lowes from "./pages/marketplace/Lowes";
+import Target from "./pages/marketplace/Target";
 
 // Service Pages
 import CompanyFormation from "./pages/services/CompanyFormation";
@@ -54,6 +55,7 @@ const App = () => (
             <Route path="/marketplace/walmart" element={<Walmart />} />
             <Route path="/marketplace/home-depot" element={<HomeDepot />} />
             <Route path="/marketplace/lowes" element={<Lowes />} />
+            <Route path="/marketplace/target" element={<Target />} />
             
             {/* Service Pages */}
             <Route path="/services/company-formation" element={<CompanyFormation />} />
