@@ -1,8 +1,38 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, TrendingUp, Package, BarChart3, Headphones, ShoppingCart, Star, Users } from "lucide-react";
+import { ArrowRight, TrendingUp, Package, BarChart3, Headphones, ShoppingCart, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PageLayout, useContactModal } from "@/components/layout/PageLayout";
+import SuccessStories, { SuccessStory } from "@/components/marketplace/SuccessStories";
+
+const BRAND_COLOR = "#FF9900";
+
+const successStories: SuccessStory[] = [
+  {
+    brand: "Anker",
+    logo: "A",
+    highlight: "12,000+",
+    highlightLabel: "Peak Daily Orders",
+    description: "Dominated electronics category with strategic PPC campaigns and optimized FBA inventory management.",
+    growth: "+520% YoY Revenue",
+  },
+  {
+    brand: "Instant Pot",
+    logo: "I",
+    highlight: "$45M+",
+    highlightLabel: "Annual Revenue",
+    description: "Leveraged Amazon's Prime Day and holiday events to capture kitchen appliance market leadership.",
+    growth: "+380% Category Share",
+  },
+  {
+    brand: "Burt's Bees",
+    logo: "B",
+    highlight: "22x",
+    highlightLabel: "Traffic Growth",
+    description: "Built brand awareness through Subscribe & Save optimization and A+ Content enhancement.",
+    growth: "+290% Conversion Rate",
+  },
+];
 
 const features = [
   { icon: ShoppingCart, title: "FBA & FBM Management", description: "Optimize your fulfillment strategy with expert guidance on when to use FBA vs FBM." },
@@ -128,6 +158,14 @@ const AmazonContent = () => {
           </div>
         </div>
       </section>
+
+      {/* Success Stories */}
+      <SuccessStories
+        title="Amazon Success Stories"
+        subtitle="See how top brands achieved exceptional growth on the world's largest marketplace."
+        stories={successStories}
+        brandColor={BRAND_COLOR}
+      />
 
       {/* CTA */}
       <section className="py-24 bg-[#FF9900]">

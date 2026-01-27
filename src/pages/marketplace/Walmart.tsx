@@ -3,6 +3,36 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Truck, BarChart3, Package, Tag, Shield, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PageLayout, useContactModal } from "@/components/layout/PageLayout";
+import SuccessStories, { SuccessStory } from "@/components/marketplace/SuccessStories";
+
+const BRAND_COLOR = "#0071DC";
+
+const successStories: SuccessStory[] = [
+  {
+    brand: "Anker",
+    logo: "A",
+    highlight: "8,500+",
+    highlightLabel: "Peak Daily Orders",
+    description: "Achieved market leadership in electronics through WFS optimization and strategic Walmart Connect campaigns.",
+    growth: "+420% YoY Revenue",
+  },
+  {
+    brand: "Shark",
+    logo: "S",
+    highlight: "$25M+",
+    highlightLabel: "Annual Revenue",
+    description: "Dominated vacuum category with exclusive bundles and aggressive 2-Day Delivery positioning.",
+    growth: "+310% Market Share",
+  },
+  {
+    brand: "Ozark Trail",
+    logo: "O",
+    highlight: "95%",
+    highlightLabel: "Buy Box Win Rate",
+    description: "Leveraged dynamic repricing and inventory optimization to capture outdoor recreation demand.",
+    growth: "+275% Conversion Rate",
+  },
+];
 
 const features = [
   { icon: Package, title: "WFS (Walmart Fulfillment)", description: "Leverage Walmart's fulfillment network for fast, reliable delivery and Prime-like experience." },
@@ -129,77 +159,12 @@ const WalmartContent = () => {
         </div>
       </section>
 
-      {/* Success Stories Section */}
-      <section className="py-24 bg-secondary/30">
-        <div className="container mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Walmart Success Stories
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Discover how brands are winning on America's fastest-growing marketplace.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                brand: "Anker",
-                logo: "A",
-                highlight: "8,500+",
-                highlightLabel: "Peak Daily Orders",
-                description: "Achieved market leadership in electronics through WFS optimization and strategic Walmart Connect campaigns.",
-                growth: "+420% YoY Revenue",
-              },
-              {
-                brand: "Shark",
-                logo: "S",
-                highlight: "$25M+",
-                highlightLabel: "Annual Revenue",
-                description: "Dominated vacuum category with exclusive bundles and aggressive 2-Day Delivery positioning.",
-                growth: "+310% Market Share",
-              },
-              {
-                brand: "Ozark Trail",
-                logo: "O",
-                highlight: "95%",
-                highlightLabel: "Buy Box Win Rate",
-                description: "Leveraged dynamic repricing and inventory optimization to capture outdoor recreation demand.",
-                growth: "+275% Conversion Rate",
-              },
-            ].map((story, index) => (
-              <motion.div
-                key={story.brand}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-2xl bg-card border border-border hover:border-[#0071DC]/30 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#0071DC] flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">{story.logo}</span>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-foreground">{story.brand}</h3>
-                    <span className="text-sm text-[#0071DC] font-medium">{story.growth}</span>
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <div className="text-3xl font-bold text-[#0071DC]">{story.highlight}</div>
-                  <div className="text-sm text-muted-foreground">{story.highlightLabel}</div>
-                </div>
-                <p className="text-muted-foreground text-sm">{story.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SuccessStories
+        title="Walmart Success Stories"
+        subtitle="Discover how brands are winning on America's fastest-growing marketplace."
+        stories={successStories}
+        brandColor={BRAND_COLOR}
+      />
 
       {/* CTA */}
       <section className="py-24 bg-[#0071DC]">
