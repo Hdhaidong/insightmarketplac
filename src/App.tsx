@@ -25,7 +25,8 @@ import About from "./pages/About";
 import HelpCenter from "./pages/HelpCenter";
 import Blog from "./pages/Blog";
 import ResultsPage from "./pages/ResultsPage";
-import InsightsPage from "./pages/InsightsPage";
+import InsightsIndex from "./pages/insights/InsightsIndex";
+import InsightsCategoryPage from "./pages/insights/InsightsCategoryPage";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import FAQPage from "./pages/FAQPage";
 
@@ -68,7 +69,8 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
             <Route path="/results" element={<ResultsPage />} />
-            <Route path="/insights" element={<InsightsPage />} />
+            <Route path="/insights" element={<InsightsIndex />} />
+            <Route path="/insights/:category" element={<InsightsCategoryPage />} />
             <Route path="/testimonials" element={<TestimonialsPage />} />
             <Route path="/faq" element={<FAQPage />} />
             
