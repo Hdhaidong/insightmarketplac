@@ -3,6 +3,36 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Home, Wrench, Truck, Shield, BarChart3, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PageLayout, useContactModal } from "@/components/layout/PageLayout";
+import SuccessStories, { SuccessStory } from "@/components/marketplace/SuccessStories";
+
+const BRAND_COLOR = "#F96302";
+
+const successStories: SuccessStory[] = [
+  {
+    brand: "DeWalt",
+    logo: "D",
+    highlight: "5,800+",
+    highlightLabel: "Peak Daily Orders",
+    description: "Expanded professional power tool presence through Pro Xtra integration and contractor-focused marketing.",
+    growth: "+385% YoY Revenue",
+  },
+  {
+    brand: "Ryobi",
+    logo: "R",
+    highlight: "$18M+",
+    highlightLabel: "Annual Revenue",
+    description: "Captured DIY market with comprehensive battery system ecosystem and seasonal promotion strategy.",
+    growth: "+240% Category Share",
+  },
+  {
+    brand: "Husky",
+    logo: "H",
+    highlight: "18x",
+    highlightLabel: "Traffic Growth",
+    description: "Leveraged Home Depot's exclusive brand positioning and in-store return convenience.",
+    growth: "+195% Conversion Rate",
+  },
+];
 
 const features = [
   { icon: Home, title: "Pro Xtra Integration", description: "Connect with Home Depot's loyalty program to reach professional contractors and DIY enthusiasts." },
@@ -129,77 +159,12 @@ const HomeDepotContent = () => {
         </div>
       </section>
 
-      {/* Success Stories Section */}
-      <section className="py-24 bg-secondary/30">
-        <div className="container mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Home Depot Success Stories
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              See how brands are growing with America's #1 home improvement retailer.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                brand: "DeWalt",
-                logo: "D",
-                highlight: "5,800+",
-                highlightLabel: "Peak Daily Orders",
-                description: "Expanded professional power tool presence through Pro Xtra integration and contractor-focused marketing.",
-                growth: "+385% YoY Revenue",
-              },
-              {
-                brand: "Ryobi",
-                logo: "R",
-                highlight: "$18M+",
-                highlightLabel: "Annual Revenue",
-                description: "Captured DIY market with comprehensive battery system ecosystem and seasonal promotion strategy.",
-                growth: "+240% Category Share",
-              },
-              {
-                brand: "Husky",
-                logo: "H",
-                highlight: "18x",
-                highlightLabel: "Traffic Growth",
-                description: "Leveraged Home Depot's exclusive brand positioning and in-store return convenience.",
-                growth: "+195% Conversion Rate",
-              },
-            ].map((story, index) => (
-              <motion.div
-                key={story.brand}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-2xl bg-card border border-border hover:border-[#F96302]/30 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#F96302] flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">{story.logo}</span>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-foreground">{story.brand}</h3>
-                    <span className="text-sm text-[#F96302] font-medium">{story.growth}</span>
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <div className="text-3xl font-bold text-[#F96302]">{story.highlight}</div>
-                  <div className="text-sm text-muted-foreground">{story.highlightLabel}</div>
-                </div>
-                <p className="text-muted-foreground text-sm">{story.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SuccessStories
+        title="Home Depot Success Stories"
+        subtitle="See how brands are growing with America's #1 home improvement retailer."
+        stories={successStories}
+        brandColor={BRAND_COLOR}
+      />
 
       {/* CTA */}
       <section className="py-24 bg-[#F96302]">
