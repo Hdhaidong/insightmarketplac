@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, ChevronDown, Building2, Truck, Megaphone, ShoppingCart, Store, Home, Wrench, Sparkles, ArrowRight, Zap, BookOpen, FileText, HelpCircle, Newspaper } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, Building2, Truck, Megaphone, ShoppingCart, Store, Home, Wrench, Sparkles, ArrowRight, Zap, BookOpen, FileText, HelpCircle, Newspaper, Users, Flame, Target, TestTube, BarChart3, PlayCircle, TrendingUp } from "lucide-react";
 import { useContactModal } from "@/contexts/ContactModalContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link } from "react-router-dom";
@@ -17,9 +17,59 @@ import { cn } from "@/lib/utils";
 
 const sectionLinks = [
   { label: "Results", href: "/results" },
-  { label: "Insights", href: "/insights" },
   { label: "Testimonials", href: "/testimonials" },
   { label: "FAQ", href: "/faq" },
+];
+
+const insightLinks = [
+  { 
+    label: "网红分析", 
+    labelEn: "Influencer Analysis",
+    href: "/insights/influencer-analysis",
+    icon: Users,
+    description: "深度剖析头部网红的带货能力和合作价值",
+    color: "#8B5CF6"
+  },
+  { 
+    label: "爆品分析", 
+    labelEn: "Hot Product Analysis",
+    href: "/insights/hot-product-analysis",
+    icon: Flame,
+    description: "追踪全网热销爆款和产品成功要素",
+    color: "#EF4444"
+  },
+  { 
+    label: "新品招募", 
+    labelEn: "New Product Recruitment",
+    href: "/insights/new-product-recruitment",
+    icon: Target,
+    description: "发现最新上市产品和招募机会",
+    color: "#10B981"
+  },
+  { 
+    label: "样品测评", 
+    labelEn: "Sample Testing",
+    href: "/insights/sample-testing",
+    icon: TestTube,
+    description: "专业产品测评帮助明智选品决策",
+    color: "#F59E0B"
+  },
+  { 
+    label: "平台近期业绩", 
+    labelEn: "Platform Performance",
+    href: "/insights/platform-performance",
+    icon: BarChart3,
+    description: "各大电商平台的最新业绩数据",
+    color: "#3B82F6"
+  },
+  { 
+    label: "爆红视频", 
+    labelEn: "Viral Videos",
+    href: "/insights/viral-videos",
+    icon: PlayCircle,
+    description: "解码爆款视频内容和传播秘诀",
+    color: "#EC4899"
+  },
 ];
 
 const marketplaceLinks = [
@@ -343,6 +393,73 @@ export const Header = () => {
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
+
+                {/* Insights Mega Menu */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground data-[state=open]:text-foreground">
+                    Insights
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid gap-3 p-4 md:w-[650px] lg:w-[800px] lg:grid-cols-[1fr_240px]">
+                      {/* Insight Category Links */}
+                      <ul className="grid grid-cols-2 gap-3">
+                        {insightLinks.map((link) => (
+                          <li key={link.href}>
+                            <NavigationMenuLink asChild>
+                              <Link
+                                to={link.href}
+                                className={cn(
+                                  "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                )}
+                              >
+                                <div className="flex items-center gap-3">
+                                  <div 
+                                    className="flex h-10 w-10 items-center justify-center rounded-lg"
+                                    style={{ backgroundColor: `${link.color}1A` }}
+                                  >
+                                    <link.icon className="h-5 w-5" style={{ color: link.color }} />
+                                  </div>
+                                  <div>
+                                    <div className="text-sm font-medium leading-none">{link.label}</div>
+                                    <p className="text-xs text-muted-foreground/70 mt-0.5">
+                                      {link.labelEn}
+                                    </p>
+                                    <p className="line-clamp-1 text-sm leading-snug text-muted-foreground mt-1">
+                                      {link.description}
+                                    </p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                      
+                      {/* Insights Hub CTA */}
+                      <div className="rounded-xl bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 p-4 border border-primary/20">
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+                            <TrendingUp className="h-4 w-4 text-primary-foreground" />
+                          </div>
+                          <span className="text-xs font-semibold text-primary uppercase tracking-wide">市场洞察</span>
+                        </div>
+                        <h4 className="font-bold text-foreground mb-2">洞察中心</h4>
+                        <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                          深度分析各大平台的网红生态、爆品趋势和新品机会。
+                        </p>
+                        <Link to="/insights">
+                          <Button 
+                            size="sm" 
+                            className="w-full group"
+                          >
+                            查看全部洞察
+                            <ArrowRight className="h-3.5 w-3.5 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
 
@@ -484,20 +601,63 @@ export const Header = () => {
               )}
             </div>
 
+            {/* Insights Accordion */}
+            <div>
+              <button
+                onClick={() => toggleMobileSubmenu("insights")}
+                className="flex items-center justify-between w-full py-2 font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Insights
+                <ChevronDown className={`h-4 w-4 transition-transform ${expandedMobileMenu === "insights" ? "rotate-180" : ""}`} />
+              </button>
+              {expandedMobileMenu === "insights" && (
+                <div className="pl-4 flex flex-col gap-1">
+                  <Link
+                    to="/insights"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="py-3 flex items-center gap-3 text-primary font-medium"
+                  >
+                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+                      <TrendingUp className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium">洞察中心</div>
+                      <p className="text-xs text-muted-foreground">查看全部市场洞察</p>
+                    </div>
+                  </Link>
+                  {insightLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="py-3 flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <div 
+                        className="flex h-8 w-8 items-center justify-center rounded-md"
+                        style={{ backgroundColor: `${link.color}1A` }}
+                      >
+                        <link.icon className="h-4 w-4" style={{ color: link.color }} />
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium">{link.label}</div>
+                        <p className="text-xs text-muted-foreground line-clamp-1">{link.labelEn}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* Section Links */}
             {sectionLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className={`font-medium py-2 transition-colors ${
-                  activeSection === link.href.replace("#", "")
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                to={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="font-medium py-2 transition-colors text-muted-foreground hover:text-foreground"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
 
             <div className="flex flex-col gap-2 pt-4 border-t border-border">
