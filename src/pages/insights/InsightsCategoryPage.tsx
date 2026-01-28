@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Loader2, ChevronDown, Flame, Users, Target, TestTube, BarChart3, PlayCircle, LucideIcon } from "lucide-react";
+import { ArrowRight, Loader2, ChevronDown, Flame, Users, Target, TestTube, BarChart3, PlayCircle, LucideIcon, Search } from "lucide-react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { useInsights } from "@/hooks/useInsights";
 import { InsightCard } from "@/components/landing/insights/InsightCard";
 import { InsightsSidebar } from "@/components/landing/insights/InsightsSidebar";
+import { InsightSearch } from "@/components/insights/InsightSearch";
 
 interface CategoryInfo {
   id: string;
@@ -76,6 +77,12 @@ const categories: CategoryInfo[] = [
 ];
 
 const InsightsCategoryContent = ({ category }: { category: CategoryInfo }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  const handleSearch = useCallback((query: string) => {
+    setSearchQuery(query);
+  }, []);
+
   const {
     data,
     isLoading,
@@ -83,7 +90,7 @@ const InsightsCategoryContent = ({ category }: { category: CategoryInfo }) => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInsights(category.id);
+  } = useInsights(category.id, searchQuery);
 
   const allInsights = data?.pages.flatMap((page) => page.data) || [];
   const totalCount = data?.pages[0]?.totalCount || 0;
@@ -151,6 +158,20 @@ const InsightsCategoryContent = ({ category }: { category: CategoryInfo }) => {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2">
+              {/* Search Box */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.05 }}
+                className="mb-6"
+              >
+                <InsightSearch
+                  onSearch={handleSearch}
+                  isSearching={isLoading && !!searchQuery}
+                  placeholder={`在${category.label}中搜索...`}
+                />
+              </motion.div>
+
               {/* Category Navigation */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -176,9 +197,13 @@ const InsightsCategoryContent = ({ category }: { category: CategoryInfo }) => {
               </motion.div>
 
               {/* Results Count */}
-              {!isLoading && totalCount > 0 && (
+              {!isLoading && (
                 <p className="text-sm text-muted-foreground mb-4">
-                  共 {totalCount} 条洞察，已加载 {allInsights.length} 条
+                  {searchQuery ? (
+                    <>搜索 "{searchQuery}" 找到 {totalCount} 条结果</>
+                  ) : (
+                    <>共 {totalCount} 条洞察，已加载 {allInsights.length} 条</>
+                  )}
                 </p>
               )}
 
