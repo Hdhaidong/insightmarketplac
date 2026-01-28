@@ -86,6 +86,12 @@ const marketplaceLinks = [
     description: "Expand into Walmart's growing e-commerce platform"
   },
   { 
+    label: "Target Plus", 
+    href: "/marketplace/target",
+    icon: Target,
+    description: "Join Target's curated invite-only marketplace"
+  },
+  { 
     label: "Home Depot", 
     href: "/marketplace/home-depot",
     icon: Home,
