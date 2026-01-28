@@ -1,10 +1,14 @@
+import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Flame, Users, Target, TestTube, BarChart3, PlayCircle, LucideIcon, TrendingUp } from "lucide-react";
+import { ArrowRight, Flame, Users, Target, TestTube, BarChart3, PlayCircle, LucideIcon, TrendingUp, Loader2, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PageLayout, useContactModal } from "@/components/layout/PageLayout";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useSearchInsights } from "@/hooks/useInsights";
+import { InsightSearch } from "@/components/insights/InsightSearch";
+import { InsightCard } from "@/components/landing/insights/InsightCard";
 
 interface CategoryInfo {
   id: string;
@@ -75,6 +79,22 @@ const categories: CategoryInfo[] = [
 
 const InsightsIndexContent = () => {
   const { openModal } = useContactModal();
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  const handleSearch = useCallback((query: string) => {
+    setSearchQuery(query);
+  }, []);
+
+  const {
+    data: searchData,
+    isLoading: isSearching,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useSearchInsights(searchQuery);
+
+  const searchResults = searchData?.pages.flatMap((page) => page.data) || [];
+  const searchTotalCount = searchData?.pages[0]?.totalCount || 0;
 
   // Fetch counts for each category
   const { data: categoryCounts } = useQuery({
@@ -127,6 +147,15 @@ const InsightsIndexContent = () => {
               深度分析各大平台的网红生态、爆品趋势、新品机会，帮助卖家做出数据驱动的商业决策。
             </p>
             
+            {/* Global Search */}
+            <div className="max-w-xl mb-8">
+              <InsightSearch
+                onSearch={handleSearch}
+                isSearching={isSearching}
+                placeholder="搜索所有洞察文章..."
+              />
+            </div>
+            
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" onClick={openModal}>
                 获取定制报告
@@ -140,8 +169,71 @@ const InsightsIndexContent = () => {
         </div>
       </section>
 
-      {/* Category Cards Grid */}
-      <section className="py-24">
+      {/* Search Results Section - Only show when searching */}
+      {searchQuery && (
+        <section className="py-12 bg-secondary/30">
+          <div className="container mx-auto px-6 lg:px-8">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-foreground mb-2">
+                搜索结果
+              </h2>
+              <p className="text-muted-foreground">
+                {isSearching ? "搜索中..." : `找到 ${searchTotalCount} 篇关于 "${searchQuery}" 的文章`}
+              </p>
+            </div>
+            
+            {isSearching ? (
+              <div className="flex items-center justify-center py-12">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                <span className="ml-3 text-muted-foreground">搜索中...</span>
+              </div>
+            ) : searchResults.length > 0 ? (
+              <>
+                <div className="space-y-4">
+                  {searchResults.map((insight, index) => (
+                    <InsightCard key={insight.id} insight={insight} index={index} />
+                  ))}
+                </div>
+                
+                {hasNextPage && (
+                  <div className="mt-8 text-center">
+                    <Button
+                      size="lg"
+                      onClick={() => fetchNextPage()}
+                      disabled={isFetchingNextPage}
+                      className="group"
+                    >
+                      {isFetchingNextPage ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          加载中...
+                        </>
+                      ) : (
+                        <>
+                          加载更多
+                          <ChevronDown className="w-4 h-4 ml-2 group-hover:translate-y-1 transition-transform" />
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="text-center py-12 bg-card border border-border rounded-2xl">
+                <TrendingUp className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+                <p className="text-muted-foreground mb-2">未找到相关文章</p>
+                <p className="text-sm text-muted-foreground/70">
+                  尝试使用其他关键词搜索
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Category Cards Grid - Hide when searching */}
+      {!searchQuery && (
+        <section className="py-24">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -220,7 +312,8 @@ const InsightsIndexContent = () => {
             ))}
           </div>
         </div>
-      </section>
+        </section>
+      )}
 
       {/* Stats Section */}
       <section className="py-16 bg-secondary/30">
