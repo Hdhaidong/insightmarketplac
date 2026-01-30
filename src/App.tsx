@@ -37,6 +37,7 @@ import TimelinePage from "./pages/TimelinePage";
 import OmnichannelPage from "./pages/OmnichannelPage";
 import TopBrandsPage from "./pages/TopBrandsPage";
 import ProcessPage from "./pages/ProcessPage";
+import PlatformDirectoryPage from "./pages/PlatformDirectoryPage";
 
 const queryClient = new QueryClient();
 
@@ -81,6 +82,7 @@ const App = () => (
             <Route path="/omnichannel" element={<OmnichannelPage />} />
             <Route path="/top-brands" element={<TopBrandsPage />} />
             <Route path="/process" element={<ProcessPage />} />
+            <Route path="/platforms" element={<PlatformDirectoryPage />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
